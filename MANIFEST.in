@@ -1,0 +1,4 @@
+include LICENSE
+
+include double-conversion/LICENSE
+include double-conversion/double-conversion/*.h
