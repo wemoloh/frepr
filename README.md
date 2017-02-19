@@ -1,5 +1,7 @@
 # frepr
 
+[![Build Status](https://travis-ci.org/wemoloh/frepr.svg?branch=master)](https://travis-ci.org/wemoloh/frepr)
+
 Fast float repr for CPython using https://github.com/google/double-conversion.
 
 ## Usage
