@@ -14,6 +14,7 @@ setup(
     author='Bart Robinson',
     author_email='bart@bartrobinson.com',
     license='BSD 3-Clause License',
+    url='https://github.com/wemoloh/frepr',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
