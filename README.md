@@ -4,7 +4,7 @@
 
 Fast float repr for CPython using https://github.com/google/double-conversion.
 
-## Usage
+## Quick Start
 
 ```python
 >>> import frepr
@@ -19,6 +19,6 @@ Fast float repr for CPython using https://github.com/google/double-conversion.
 >>> frepr.uninstall()
 ```
 
-## Requirements
+## Features
 
-- CPython 2.7 (other versions coming soon)
+- Tested on CPython 2.6 through 3.6; probably works on others (no PyPy, though)

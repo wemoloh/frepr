@@ -17,7 +17,12 @@ static PyObject *dtoa(double f) {
     char buf[28]; 
     StringBuilder sb(buf, 28);
     conv.ToShortest(f, &sb);
+    
+    #if PY_MAJOR_VERSION < 3
     return PyString_FromStringAndSize(buf, (Py_ssize_t)sb.position());
+    #else
+    return PyUnicode_DecodeUTF8(buf, (Py_ssize_t)sb.position(), "strict");
+    #endif
 }
 
 static PyObject *frepr(PyObject *self, PyObject *pyf) {
@@ -51,8 +56,35 @@ static PyMethodDef methods[] = {
   {0, 0, 0, 0}
 };
 
+#if PY_MAJOR_VERSION >= 3
+static struct PyModuleDef moduledef = {
+    #if PY_VERSION_HEX < 0x03020000
+    { PyObject_HEAD_INIT(NULL) NULL, 0, NULL },
+    #else
+    PyModuleDef_HEAD_INIT,
+    #endif
+    "frepr",
+    NULL, /* m_doc */
+    -1, /* m_size */
+    methods, /* m_methods */
+    NULL, /* m_reload */
+    NULL, /* m_traverse */
+    NULL, /* m_clear */
+    NULL /* m_free */
+};
+#endif
+
+#if PY_MAJOR_VERSION < 3
 PyMODINIT_FUNC initfrepr(void)
+#else
+PyMODINIT_FUNC PyInit_frepr(void)
+#endif
 {
     orig_float_repr = PyFloat_Type.tp_repr;
+    
+    #if PY_MAJOR_VERSION < 3
     Py_InitModule("frepr", methods);
+    #else
+    return PyModule_Create(&moduledef);
+    #endif
 }
